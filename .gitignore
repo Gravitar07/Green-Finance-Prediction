@@ -1,0 +1,6 @@
+__pycache__
+data/final_processed_dataset.xlsx
+docs/
+logs/
+notebook
+.env
