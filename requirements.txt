@@ -1,0 +1,7 @@
+groq
+joblib
+pandas
+numpy
+python-dotenv
+scikit-learn==1.5.0
+streamlit
