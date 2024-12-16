@@ -78,5 +78,6 @@ Certification Cycle: {certification_cycle}
         response = prediction(impact_area_community, impact_area_environment, impact_area_customers, impact_area_governance, certification_cycle, input_raw_data)
         st.info(response)
 
+
 if __name__ == "__main__":
     main()
