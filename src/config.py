@@ -17,3 +17,10 @@ class Config:
     GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 
     GROQ_MODEL_NAME = 'llama3-8b-8192'
+
+    # ESG Weights
+    ESG_WEIGHTS = {
+        'environment': 0.5,
+        'social': 0.3,
+        'governance': 0.2
+    }

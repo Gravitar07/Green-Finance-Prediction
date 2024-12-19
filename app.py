@@ -49,8 +49,8 @@ def main():
         impact_area_environment = st.number_input("Impact Area - Environment", value=30.0, min_value=0.0, max_value=100.0, step=0.1)
 
     with col2:
-        impact_area_customers = st.number_input("Impact Area - Customers", value=35.0, min_value=0.0, max_value=100.0, step=0.1)
-        impact_area_governance = st.number_input("Impact Area - Governance", value=40.0, min_value=0.0, max_value=100.0, step=0.1)
+        impact_area_customers = st.number_input("Impact Area - Customers", value=40.0, min_value=0.0, max_value=100.0, step=0.1)
+        impact_area_governance = st.number_input("Impact Area - Governance", value=50.0, min_value=0.0, max_value=100.0, step=0.1)
 
     certification_cycle = st.slider("Certification Cycle", min_value=0, max_value=10, step=1)
     

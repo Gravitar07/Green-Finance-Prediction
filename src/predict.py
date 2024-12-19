@@ -2,6 +2,7 @@ import numpy as np
 from src.llm import LLM
 from src.model_store import models
 from src.exception import *
+from src.config import Config
 from src.logger import get_logger
 
 logger = get_logger(__name__)
@@ -44,6 +45,11 @@ class ML_Model_Predictor:
             raise PredictionError("Prediction failed. Ensure input data format is correct.") from e
 
 
+def calculate_esg(impact_area_environment, impact_area_community, impact_area_governance):
+    ESG_WEIGHTS = Config.ESG_WEIGHTS
+    esg_score = ((ESG_WEIGHTS['environment'] * impact_area_environment) + (ESG_WEIGHTS['social'] * impact_area_community) + (ESG_WEIGHTS['governance'] * impact_area_governance))
+    return esg_score
+
 def prediction(impact_area_community, impact_area_environment, impact_area_customers, impact_area_governance, certification_cycle, input_raw_data):
     try:
         # Initialize classes
@@ -58,8 +64,12 @@ def prediction(impact_area_community, impact_area_environment, impact_area_custo
         # Get predictions from ML model
         ml_prediction_result = ml_predictor.predict(preprocessed_data)
 
+        esg_score = calculate_esg(impact_area_community, impact_area_environment, impact_area_governance)
+
         result = f"""
         Green Finance Report:
+
+        **ESG Score:** {esg_score}
         
         **ML Model Risk Probability Prediction:** {ml_prediction_result}
         

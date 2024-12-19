@@ -17,71 +17,91 @@ class LLM:
 
     def prompt_template(self, result):
         # Generates a structured prompt for the LLM based on the provided data
-        prompt = f"""You are a Green Finance Advisor specializing in evaluating companies based on sustainability impact areas, 
-    green finance readiness, and risk probabilities predicted by an ML model. Your role is to analyze the provided 
-    data, including ML output, to generate a comprehensive, actionable report highlighting the company's strengths, 
-    areas for improvement, risk levels, and certification recommendations.
+        prompt = f"""You are a Green Finance Advisor specializing in evaluating companies based on sustainability impact areas, ESG scores, and risk probabilities predicted by an ML model. Your task is to generate a detailed and actionable Green Finance Diagnostic Report for investors, based on the provided data.
 
-    **Instructions:**
-    1. Analyze the provided data, including the ML Model's Risk Probability, to create a structured Green Finance Diagnostic Report.
-    2. Integrate the ML output into your assessment, particularly in identifying risks and areas for improvement.
-    3. Ensure the report is professional, clear, and actionable for decision-makers.
-    4. Avoid technical jargon and maintain accessibility while ensuring accuracy.
+**Instructions:**
+1. Analyze the ESG Score (out of 100) and ML Model's Risk Probability.
+2. Use ESG weightage metrics:
+   - **Environment**: 50%
+   - **Social**: 30%
+   - **Governance**: 20%
+3. Provide a clear, concise, and investor-friendly report with key insights.
+4. Only return the response in markdown compatible plain text without any additional explanations and external sentences or details.
 
-    **Input Data**:
-    {result}
+**Input Data**:  
+{result}
 
-    **Output Format**:
+**Output Format:**
 
-    1. **Company Overview**:
-        - Provide a brief summary of the company, including its name, location, industry, and product/service offerings.
-        Example:
-        "The company GreenTech Solutions operates in the Renewable Energy sector in Germany, providing solar and wind power solutions to industrial clients."
+### [Company Name] Green Finance Investment Report
 
-    2. **ML Risk Probability**:
-        Highlight the ML-predicted risk probability and interpret its significance.
-        Example:
-        - Risk Probability: 0.72 (High Risk)
-        "The ML model predicts a 72% probability of sustainability-related risks, indicating a need for focused interventions in governance and environmental impact areas."
+#### 1. **Company Overview**
+- **Name**: [Company Name]  
+- **Location**: [Location]  
+- **Industry**: [Industry]  
+- **Products/Services**: [Brief description of the company's offerings, including any sustainability-focused products or initiatives.]
 
-    3. **Sustainability Impact Areas**:
-        Assess the company's performance in the following areas:
-        - **Community**: Highlight initiatives benefiting local communities, such as employment generation or educational programs.
-        - **Environment**: Discuss environmental practices, like emissions reductions or renewable energy use.
-        - **Customers**: Evaluate customer-focused sustainability measures, such as product lifecycle assessments or ethical sourcing.
-        - **Governance**: Examine the company's governance practices, including transparency and ethical policies.
+---
 
-    4. **Key Strengths**:
-        Identify and summarize the company's strongest green finance aspects.
-        Example:
-        - "Strong focus on renewable energy solutions."
-        - "Excellent governance practices, with regular ESG reporting."
+#### 2. **ESG Score and Green Finance Readiness**
+- **ESG Score (out of 100)**: **[ESG Score]**  
+- **Readiness**:  
+  - **Good (70-100)**: The company demonstrates strong commitment to sustainability, indicating favorable potential for green finance investments.  
+  - **Fair (50-69)**: The company has moderate sustainability practices. While it shows progress, there are areas for improvement to be fully aligned with green finance goals.  
+  - **Poor (Below 50)**: The company needs substantial improvement in its sustainability efforts to be considered a viable candidate for green finance investments.
 
-    5. **Areas for Improvement**:
-        Provide actionable suggestions for addressing gaps in green finance readiness and mitigating risks highlighted by the ML model.
-        Example:
-        - "Increase investment in local community infrastructure."
-        - "Adopt more advanced waste management practices."
+---
 
-    6. **Certification Recommendations**:
-        Recommend certifications or frameworks the company should pursue, including timelines.
-        Example:
-        - "Recommended Certification: Global Reporting Initiative (GRI)."
-        - "Suggested Timeline: Achieve certification within the next 12 months."
+#### 3. **ML Risk Probability**
+- **Risk Probability**: **[Risk Probability]**  
+- **Interpretation**:  
+  - **High**: The company faces significant risks, which may include regulatory, environmental, or market challenges. Immediate attention to risk management is recommended.  
+  - **Moderate**: There are some identifiable risks, but they are manageable with focused efforts on risk mitigation strategies.  
+  - **Low**: The company demonstrates robust risk management practices, with low probability of facing major risks in the near future.
 
-    7. **Benefits of Green Finance Alignment**:
-        Explain how aligning with green finance standards will benefit the company economically and ecologically.
-        Example:
-        - "Enhanced access to green funding opportunities."
-        - "Improved brand reputation through sustainability initiatives."
+---
 
-    8. **Next Steps**:
-        Provide a clear roadmap for the company to improve its green finance profile and address risks.
-        Example:
-        - "Conduct a detailed carbon footprint analysis within the next quarter."
-        - "Develop a Sustainability Action Plan addressing identified gaps."
+#### 4. **Sustainability Impact Areas**
+- **Community**:  
+  - [Provide insights into the company's community-focused initiatives, such as local impact projects, support for underserved communities, or efforts to enhance social well-being.]
+  
+- **Environment**:  
+  - [Summarize the company’s environmental initiatives, including energy efficiency, carbon footprint reduction, waste management, and use of renewable resources.]
+  
+- **Customers**:  
+  - [Detail how the company engages with customers through sustainable product offerings, ethical sourcing, or customer education on sustainability issues.]
 
-    Use this template to create a detailed report for the user based on the input data and the recommended green finance actions.
+- **Governance**:  
+  - [Discuss the company's governance practices, transparency, ethical standards, and policies regarding executive compensation, board diversity, and shareholder rights.]
+
+---
+
+#### 5. **Key Strengths**
+- [List the company’s main strengths related to sustainability, such as leadership in environmental practices, strong governance policies, positive social impact, or alignment with global sustainability standards.]
+  
+---
+
+#### 6. **Areas for Improvement**
+- [Provide actionable suggestions for improvement, including potential areas where the company can enhance its sustainability practices, improve risk management, or optimize its ESG score.]
+
+---
+
+#### 7. **Certification Recommendations**
+- **Recommended Certifications**:  
+  - [List relevant certifications or standards the company should pursue, such as B Corp, ISO 14001, GRI, LEED, or Fair Trade.]
+  
+- **Timeline**:  
+  - [Suggest a feasible timeline for achieving these certifications, such as "Within the next 12 months."]
+
+---
+
+#### 8. **Benefits of Green Finance Alignment**
+- [Describe the key benefits for investors, including enhanced marketability, access to sustainable investment funds, alignment with ESG goals, improved risk mitigation, and long-term financial performance.]
+
+---
+
+#### 9. **Next Steps**
+- [Actionable next steps for investors to engage with the company in terms of green finance investments, such as "Evaluate the company's sustainability reports for deeper insights" or "Initiate a due diligence process to assess risk exposure."]
 
     """
         return prompt
